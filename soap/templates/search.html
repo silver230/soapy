@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+  <div class="row" >
+ {% if post %}
+ {% for pic in post %}
+<img src="{{pic.post.cdn_url}}"  class='img-responsive'alt="posthood" style='margin-top:10px;'>
+   <!-- <figcaption> -->
+ <p>Name: {{pic.post.name}}</p>
+ 
+
+
+   {% endfor %}
+ </div>
+</div>
+
+
+
+
+      {% else %}
+      <p>NO neighborhood</p>
+      {% endif %}
+{% endblock%}

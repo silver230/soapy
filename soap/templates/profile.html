@@ -1,0 +1,132 @@
+{% extends 'base.html'%}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+
+{% if profile %}
+{% for prof in profile %}
+
+<!-- Home Section Start -->
+<section class="home-section">
+    <div class="container-fluid" style="height: 100vh;">
+        <div class="row">
+<center><h1>{{user.username}}'s Profile</h1>
+             <div class="col-sm-offset-2 col-md-4 col-sm-6 margin-left-setting">
+                <div class="margin-top-150">
+
+                 <div class="table-responsive">
+          <table class="table">
+          <tr>
+              <td>Username</td>
+            <td>{{user.username}}</td>
+           </tr>
+                         <tr>
+            <td>Email</td>
+            <td>{{user.email}}</td>
+          </tr>
+          <tr>
+            <td>First Name</td>
+            <td>{{user.first_name}}</td>
+           </tr>
+          <tr>
+            <td>Last Name</td>
+            <td>{{user.last_name}}</td>
+          </tr>
+          <tr>
+            <td>Contact</td>
+            <td>{{prof.contact}}</td>
+          </tr>
+            <tr>
+            <td>Bio</td>
+            <td>{{prof.bio}}</td>
+          </tr>
+        </table>
+        </div>
+                 </div>
+               </div>
+
+             <div class="col-md-5 col-sm-6">
+                <div class="me-project">
+                  <img  src='{{prof.picture.cdn_url}}' class='img-responsive img-rounded' style="height: 200px;width: 50%;">
+              </div>
+            </div>
+
+
+            <!--Delete Album -->
+                        <form action="{% url 'profile-delete' prof.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="profile_id" value="{{ prof.id }}" />
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </form></br>
+                        
+                                              
+
+          </div>
+        </div>
+    </section>
+    <!-- Home Section End -->
+{% endfor %}
+{% else %}
+
+<center><button type="button" class="btn btn-outline-secondary"><a href="{% url 'create'%}">
+   Please create and edit your profile</a></button></center>
+{% endif %}
+
+
+<center><h1>My post </h1></center>
+ 
+
+<div class="container">
+  <div class="row" >
+ {% if post %}
+ {% for pic in post %}
+
+ <div class="col-md-3" style='border:1px solid black; margin:20px'>
+
+
+
+   <img src="{{pic.area.cdn_url}}"  class='img-responsive'
+     alt="post " style='margin-top:10px;'>
+   <!-- <figcaption> -->
+<!-- Delete Album -->
+  <form action="{% url 'album-delete' pic.id %}" method="post" style="display: inline;">
+      {% csrf_token %}
+      <input type="hidden" name="project_id" value="{{ pic.id }}" />
+      <button style="margin-bottom:20px;"  type="submit" class="btn btn-danger btn-lg">
+          <span class="glyphicon glyphicon-trash"></span>
+      </button>
+  </form>
+  <!--edit-album-->
+   <form action="{% url 'album-update' pic.id %}" method="post" style="display: inline;">
+ {% csrf_token %}
+   <input type="hidden" name="project_id" value="{{ pic.id }}" />
+   <button style="margin-bottom:20px;" type="submit" class="btn btn-primary btn-lg">
+       <span class="glyphicon glyphicon-edit"></span>
+   </button>
+ </form>
+ </div>
+   {% endfor %}
+ </div>
+</div>
+
+
+
+      {% else %}
+      <p>Nothing has been posted for now</p>
+      {% endif %}
+
+
+
+
+           
+         <!-- Footer End -->
+
+
+         <!-- Back to Top Start -->
+         <a href="#" class="scroll-to-top"><i class="icon-arrow-up-circle"></i></a>
+         <!-- Back to Top End -->
+
+
+{% endblock %}

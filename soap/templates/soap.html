@@ -1,0 +1,211 @@
+{%extends 'base.html'%}
+{%load bootstrap4%}
+{% block content %}
+  
+<!-- <body  style="background-color:black; color:black;"> -->
+<body style="color:black">
+<div class="container-fluid">
+  <center>
+       <h1>WELCOME TO STAARS SHOP WEBSITE</h1>
+  </center>
+  
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+      <li data-target="#demo" data-slide-to="0" class="active"></li>
+      <li data-target="#demo" data-slide-to="1"></li>
+      <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+  
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://thethingswellmake.com/wp-content/uploads/2016/06/easy-DIY-liquid-castile-soap-recipe-3WMeng.jpg" alt="Los Angeles" width=100% height=350px;>
+      </div>
+      <div class="carousel-item">
+        <img src="https://ae01.alicdn.com/kf/HTB1hWUxQVXXXXcyXVXXq6xXFXXXr/Blow-Gun-Children-Bubble-Soap-Bubble-Wand-Mermaid-Water-Blowing-Maker-Machine-Kids-Boy-Girl-Toy.jpg_640x640.jpg" alt="Chicago" width=100% height=350px;>
+      </div>
+      <div class="carousel-item">
+        <img src="https://5.imimg.com/data5/PO/NJ/MY-44701182/liquid-handmade-soap-500x500.jpg" alt="New York" width=100% height=350px;>
+      </div>
+    </div>
+  
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
+  
+  </div>
+
+<div class ="jumbotron bg-secondary " >
+<h1> simply made with care to your skin </h1>
+<p>Below are types of soaps with images that we do sell:</p>
+        {% for photo in photos %}
+
+        <!-- Button trigger modal -->
+<button type="button" data-toggle="modal" data-target="#exampleModalCenter">
+    <a class="img-thumbnail" href="{{photo.image}}" data-image-id="{{photo.id}}" data-toggle="modal" data-target="#{{photo.id}}">
+    <img src="{{ photo.post.cdn_url }}" alt="Image" id="img{{photo.id}}" class="img-fluid" alt="image" style="width:200px;height:210px;padding:10px">
+   </a>
+  <h5 class="modal-title" id="exampleModalLongTitle">{{ photo.name }}</h5>
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="{{photo.id}}" tabindex="-1" role="dialog" aria-labelledby="{{photo.id}}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">{{ photo.name }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body"  >
+            <img src="{{ photo.post.cdn_url }}" alt="Image" id="img{{photo.id}}" class="img-fluid" alt="image">
+          <p>Posted : {{photo.pub_date_posted|timesince}} ago</p>
+          <p>description : {{ photo.description }}</p>
+          <p>price : {{photo.price}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+         
+      {% endfor %}
+    </div>
+ </div>
+  </div>
+
+  <script>
+    function copyLink(id) {
+      /* Get the text field */
+      var copyText = document.getElementById("thislinkhere-" + id);
+      /* Select the text field */
+      copyText.select();
+      /* Copy the text inside the text field */
+      document.execCommand("copy");
+      /* Alert the copied text */
+      alert("Don't forget to share this link: " + copyText.value);
+    }
+  </script>
+<!-- Footer -->
+<footer class="page-footer font-small mdb-color pt-4 " style="background-color:black; color: whitesmoke">
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left">
+
+    <!-- Footer links -->
+    <div class="row text-center text-md-left mt-3 pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h6 class="text-uppercase mb-4 font-weight-bold">Company name</h6>
+        <p> ready to make it possile to you ::::</p>
+      </div>
+      <!-- Grid column -->
+
+      <hr class="w-100 clearfix d-md-none">
+
+       
+      <hr class="w-100 clearfix d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+        <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
+        <p>
+          <a href="#!">Your Account</a>
+        </p>
+        <p>
+          <a href="#!">Become an Affiliate</a>
+        </p>
+         
+      </div>
+
+      <!-- Grid column -->
+      <hr class="w-100 clearfix d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+        <p>
+          <i class="fas fa-home mr-3"></i>  Nairobi,kibera</p>
+        <p>
+          <i class="fas fa-envelope mr-3"></i> sylveromondi@gmail.com</p>
+        <p>
+          <i class="fas fa-phone mr-3"></i> +254716841679</p>
+        <p>
+          <i class="fas fa-print mr-3"></i> +254791687184</p>
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Footer links -->
+
+    <hr>
+
+    <!-- Grid row -->
+    <div class="row d-flex align-items-center">
+
+      <!-- Grid column -->
+      <div class="col-md-7 col-lg-8">
+
+        <!--Copyright-->
+        <p class="text-center text-md-left">© 2018 Copyright:staar230
+          
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-5 col-lg-4 ml-lg-0">
+
+        <!-- Social buttons -->
+        <div class="text-center text-md-right">
+          <ul class="list-unstyled list-inline">
+            <li class="list-inline-item">
+              <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                <i class="fab fa-google-plus-g"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+</footer>
+<!-- Footer -->
+
+  </body>
+  </html>
+  {% endblock %}
+ 
